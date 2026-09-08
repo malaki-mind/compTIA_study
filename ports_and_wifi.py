@@ -42,6 +42,8 @@ ports = { "FTP": {"name" : "File Transfer Protocol (FTP)",
          
          }
 
+## make function to take dict and make into a list, then randomize
+
 port_list = []
 
 for item in ports:
@@ -51,6 +53,18 @@ for item in ports:
     
 random.shuffle(port_list)
 
-for port in port_list:
-    print(port[number])
+## create practice drill functions, IE loop til correct, no scores taken
+## one for guessing port numbers
 
+user_input = ""
+for port in port_list:
+    user_input = str(input(f"{port[name]} is in which port?\n"))
+    while(user_input != port[number]):
+        user_input = str(input(f"wrong\n"))
+## one for guessing port names
+## one for guessing Wifi frequency
+## one for guessing Wifi transfer data rate
+## one for guessing Wifi ranges
+        
+## create quiz with scores given, only one shot to answer each question
+## create menu to choose btwn these options
