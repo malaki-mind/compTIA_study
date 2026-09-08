@@ -26,7 +26,19 @@ ports = { "FTP": {"name" : "File Transfer Protocol (FTP)",
          "POP3" : {"name" : "Post Office Protocol v3 (POP3)",
                    "number" : "110"},
          "NetBIOS/NetBT" : {"name" : "NetBIOS, NetBT",
-                          "number" : "137, 138, 139"}
+                          "number" : "137, 138, 139"},
+         "IMAP" : {"name" : "Internet Mail Access Protocol (IMAP)",
+                   "number" : "153"},
+         "SNMP" : {"name" : "Simple Network Management Protocol (SNMP)",
+                   "number" : "161/162"},
+         "LDAP" : {"name" : "Lightweight Directory Access Protocol (LDAP)",
+                   "number" : "389"},
+         "HTTPS" : {"name" : "HyperText Transfer Protocol Secure (HTTPS)",
+                    "number" : "443"},
+         "SMB/CIFS" : {"name" : "Server Message Block (SMB)/Common Internet File System (CIFS)",
+                       "number" : "445"},
+         "RDP" : {"name" : "Remote Desktop Protocol",
+                  "number" : "3389"}
          
          }
 
