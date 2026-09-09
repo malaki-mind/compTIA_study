@@ -43,24 +43,43 @@ ports = { "FTP": {"name" : "File Transfer Protocol (FTP)",
          }
 
 ## make function to take dict and make into a list, then randomize
+def dict_to_list(dictionary):
+    new_list = []
 
-port_list = []
-
-for item in ports:
-    print(ports[item].values())
-    port_list.append(list(ports[item].values()))
-    print (port_list)
+    for item in dictionary:
+        new_list.append(list(dictionary[item].values()))    
     
-random.shuffle(port_list)
+    return new_list
 
+def print_list(new_list):
+    for i in new_list:
+        print(i)
+     
+def print_port(port_dict, protocol):
+    p_data = port_dict[protocol]
+    try:
+        p_data
+    except:
+        print("Protocol not found")
+    else:
+        print(p_data.get("name"), "is in Port", p_data.get("number"))
+        
 ## create practice drill functions, IE loop til correct, no scores taken
 ## one for guessing port numbers
 
-user_input = ""
-for port in port_list:
-    user_input = str(input(f"{port[name]} is in which port?\n"))
-    while(user_input != port[number]):
-        user_input = str(input(f"wrong\n"))
+port_list = dict_to_list(ports)
+
+def drill(dictionary, question, key_1, key_2):
+    new_list = dict_to_list(dictionary)
+    random.shuffle(new_list)
+    user_input = ""
+    for item in new_list:
+        user_input = str(input(f"{item[key_1]} {question}\n"))
+        while(user_input != item[key_2]):
+            user_input = str(input(f"wrong\n"))
+        print("correct!")
+        
+
 ## one for guessing port names
 ## one for guessing Wifi frequency
 ## one for guessing Wifi transfer data rate
@@ -68,3 +87,4 @@ for port in port_list:
         
 ## create quiz with scores given, only one shot to answer each question
 ## create menu to choose btwn these options
+drill(ports, "is in which port?", name, number)
