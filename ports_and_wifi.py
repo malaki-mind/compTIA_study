@@ -5,44 +5,61 @@ Created on Sun Sep  6 11:25:51 2026
 @author: 19735
 """
 import random
+## make CONST CLASSES for index values and dictionaries
 
-name = 0
-number = 1
-
-ports = { "FTP": {"name" : "File Transfer Protocol (FTP)", 
-                  "number": "20/21"},
-         "SSH" : {"name" : "Secure Shell (SSH)", 
-                  "number" : "22"},
-         "Telnet" : {"name" : "Telnet", 
-                     "number" : "23"},
-         "SMTP" : {"name" : "Simple Mail Transfer Protocol (SMTP)",
-                   "number" : "25"},
-         "DNS" : {"name" : "Domain Name System (DNS)",
-                  "number" : "53"},
-         "DHCP" : {"name" : "Dynamic Host Configuration Protocol (DHCP)",
-                   "number" : "67/68"},
-         "HTTP" : {"name" : "HyperText Transfer Protocol (HTTP)",
-                   "number" : "80"},
-         "POP3" : {"name" : "Post Office Protocol v3 (POP3)",
-                   "number" : "110"},
-         "NetBIOS/NetBT" : {"name" : "NetBIOS, NetBT",
-                          "number" : "137, 138, 139"},
-         "IMAP" : {"name" : "Internet Mail Access Protocol (IMAP)",
-                   "number" : "153"},
-         "SNMP" : {"name" : "Simple Network Management Protocol (SNMP)",
-                   "number" : "161/162"},
-         "LDAP" : {"name" : "Lightweight Directory Access Protocol (LDAP)",
-                   "number" : "389"},
-         "HTTPS" : {"name" : "HyperText Transfer Protocol Secure (HTTPS)",
-                    "number" : "443"},
-         "SMB/CIFS" : {"name" : "Server Message Block (SMB)/Common Internet File System (CIFS)",
-                       "number" : "445"},
-         "RDP" : {"name" : "Remote Desktop Protocol (RDP)",
-                  "number" : "3389"}
+class Ports_Index:
+    # port indices
+    NAME = 0
+    NUMBER = 1
+class Wifi_Index:
+    GEN = 0
+    STANDARD = 1
+    FREQ = 2
+    SPEED = 3
+    DISTANCE = 4
+    
+class Port_Dict:
+    PORTS = { "FTP": {"name" : "File Transfer Protocol (FTP)", 
+                      "number": "20/21"},
+             "SSH" : {"name" : "Secure Shell (SSH)", 
+                      "number" : "22"},
+             "Telnet" : {"name" : "Telnet", 
+                         "number" : "23"},
+             "SMTP" : {"name" : "Simple Mail Transfer Protocol (SMTP)",
+                       "number" : "25"},
+             "DNS" : {"name" : "Domain Name System (DNS)",
+                      "number" : "53"},
+             "DHCP" : {"name" : "Dynamic Host Configuration Protocol (DHCP)",
+                       "number" : "67/68"},
+             "HTTP" : {"name" : "HyperText Transfer Protocol (HTTP)",
+                       "number" : "80"},
+             "POP3" : {"name" : "Post Office Protocol v3 (POP3)",
+                       "number" : "110"},
+             "NetBIOS/NetBT" : {"name" : "NetBIOS, NetBT",
+                                "number" : "137, 138, 139"},
+             "IMAP" : {"name" : "Internet Mail Access Protocol (IMAP)",
+                       "number" : "153"},
+             "SNMP" : {"name" : "Simple Network Management Protocol (SNMP)",
+                       "number" : "161/162"},
+             "LDAP" : {"name" : "Lightweight Directory Access Protocol (LDAP)",
+                       "number" : "389"},
+             "HTTPS" : {"name" : "HyperText Transfer Protocol Secure (HTTPS)",
+                        "number" : "443"},
+             "SMB/CIFS" : {"name" : "Server Message Block (SMB)/Common Internet File System (CIFS)",
+                           "number" : "445"},
+             "RDP" : {"name" : "Remote Desktop Protocol (RDP)",
+                      "number" : "3389"}
          
          }
+    
+class Menu_Options:
+    PORT_FIND = 1
+    PORT_NUM_DRILL = 2
+    PORT_PRO_DRILL = 3
+    PORT_NUM_QUIZ = 4
+    PORT_PRO_QUIZ = 5
+    QUIT = 6
 
-## make function to take dict and make into a list, then randomize
 def dict_to_list(dictionary):
     new_list = []
 
@@ -64,9 +81,6 @@ def print_port(port_dict, protocol):
     else:
         print(p_data.get("name"), "is in Port", p_data.get("number"))
         
-## create practice drill functions, IE loop til correct, no scores taken
-## one for guessing port numbers
-
 def drill(dictionary, question, q, a):
     new_list = dict_to_list(dictionary)
     random.shuffle(new_list)
@@ -106,42 +120,25 @@ def menu():
             print("invalid response")
     return user_input
      
-## one for guessing port names
-## one for guessing Wifi frequency
-## one for guessing Wifi transfer data rate
-## one for guessing Wifi ranges
-        
-## create quiz with scores given, only one shot to answer each question
-## create menu to choose btwn these options
 
-class Menu_Options:
-    PORT_FIND = 1
-    PORT_NUM_DRILL = 2
-    PORT_PRO_DRILL = 3
-    PORT_NUM_QUIZ = 4
-    PORT_PRO_QUIZ = 5
-    QUIT = 6
 
 def main():
-
     menu_choice = -1
     while(menu_choice != Menu_Options.QUIT):
         menu_choice = menu()
         match menu_choice:
             case Menu_Options.PORT_FIND:
                 user_input = str(input("Enter a Protocol Abbreviation: "))
-                print_port(ports, user_input)
+                print_port(Port_Dict.PORTS, user_input)
             case Menu_Options.PORT_NUM_DRILL:
-                drill(ports, "is in which port?", name, number)
+                drill(Port_Dict.PORTS, "is in which port?", Ports_Index.NAME, Ports_Index.NUMBER)
             case Menu_Options.PORT_PRO_DRILL:
-                drill(ports, "has which protocol?", number, name)
+                drill(Port_Dict.PORTS, "has which protocol?", Ports_Index.NUMBER, Ports_Index.NAME)
             case Menu_Options.PORT_NUM_QUIZ:
-                print(quiz(ports, "is in which port?", name, number))
+                print(quiz(Port_Dict.PORTS, "is in which port?", Ports_Index.NAME, Ports_Index.NUMBER))
             case Menu_Options.PORT_PRO_QUIZ:
-                print(quiz(ports, "has which protocol?", number, name))
+                print(quiz(Port_Dict.PORTS, "has which protocol?", Ports_Index.NUMBER, Ports_Index.NAME))
             case _:
-               print("how?")
+               break
 
-#total_score = quiz(ports, "is in which port?", name, number)
-#print(total_score)
 main()
