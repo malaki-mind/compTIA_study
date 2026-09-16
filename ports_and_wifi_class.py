@@ -2,7 +2,6 @@
 """
 Created on Sun Sep  6 11:25:51 2026
 
-@author: 19735
 """
 import random
 ## make CONST CLASSES for index values and dictionaries
@@ -93,9 +92,7 @@ class Option:
                             self.funct : None}
         self.menu_opts = self.choice_dict[self.menu]
         self.funct_opts = self.choice_dict[self.funct]
-        #self.menu_choices = self.menu_opts.keys()
-        
-        
+  
     def print_menu(self):
         for key in self.menu_opts:
             print(f"{key}. {self.menu_opts[key]}")
@@ -275,93 +272,13 @@ def main():
     
     ports.study_data = Port_Dict.PORTS
     wifi.study_data = Wifi_Dict.WIFI
- 
-    
+  
     while (user_inp != "q"):
         main_menu.print_menu()
         user_inp = main_menu.inp()
-
-
         match user_inp:
             case ports.opt_num:
                 ports.test_choice()
             case wifi.opt_num:
-                wifi.test_choice()
-            
-            
+                wifi.test_choice()    
 main()
-    
-
-
-    
-    
-    
-
-"""
-main_menu = Option()
-main_menu.menu_opts = {ports.opt_num : "Ports",
-                           wifi.opt_num : "Wifi"}
-main_menu.funct_opts = {ports.opt_num : ports.study_menu,
-                            wifi.opt_num : wifi.study_menu}
-"""
-"""
-ports.templates[ports.find] = ({"1" : "Enter Protocol Abbreviation: "})
-ports.templates[ports.drill] = { study.PORTS_BY_NUM : 
-                                    {"question" : "is in which port?", 
-                                     "q" : Ports_Index.NAME,
-                                     "a" : Ports_Index.NUMBER 
-                                     },
-                                study.PORTS_BY_NAME : 
-                                    {"question" : "has which protocol?",
-                                    "q" : Ports_Index.NUMBER,
-                                    "a" : Ports_Index.NAME
-                                    }
-                                }
-ports.templates[ports.quiz] = ports.templates[ports.drill]
-"""
-"""
-ports.menu_opts[ports.find] = {"1" : "Find by Protocol"}
-ports.funct_opts[ports.find] = ports.find_funct
-
-ports.menu_opts[ports.drill] = {study.PORTS_BY_NUM : "Port Number Drill",
-                                study.PORTS_BY_NAME: "Protocols Drill"}
-ports.funct_opts[ports.drill] = ports.drill_funct
-
-ports.menu_opts[ports.quiz] = {study.PORTS_BY_NUM : "Port Number Quiz",
-                               study.PORTS_BY_NAME : "Protocols Quiz"}
-ports.funct_opts[ports.quiz] = ports.quiz_funct
-
-wifi.templates[wifi.find] = ({"1" : "Enter Wifi Generation: "})
-wifi.templates[wifi.drill] = {study.WIFI_FREQ :
-                              {"question" : "is on what frequency?",
-                               "q" : Wifi_Index.STANDARD,
-                               "a" : Wifi_Index.FREQ
-                               },study.WIFI_SPEED :
-                              {"question" : "operates at what max data rate?",
-                               "q" : Wifi_Index.STANDARD,
-                               "a" : Wifi_Index.SPEED
-                              },study.WIFI_RANGE : 
-                               {"question" : "spans what maximum distance?",
-                                "q" : Wifi_Index.STANDARD,
-                                "a" : Wifi_Index.RANGE
-                               }
-                             }
-wifi.templates[wifi.quiz] = wifi.templates[wifi.drill]
-
-wifi.menu_opts[wifi.find] = {"1" : "Find by Generation"}
-wifi.menu_opts[wifi.drill] = {study.WIFI_FREQ : "Wifi Frequency Drill",
-                              study.WIFI_SPEED : "Wifi Data Rate Drill",
-                              study.WIFI_RANGE : "Wifi Range Drill"}
-wifi.menu_opts[wifi.quiz] = {study.WIFI_FREQ : "Wifi Frequency Quiz",
-                              study.WIFI_SPEED : "Wifi Data Rate Quiz",
-                              study.WIFI_RANGE : "Wifi Range Quiz"}
-
-wifi.funct_opts[wifi.find] = wifi.find_funct
-wifi.funct_opts[wifi.drill] = wifi.drill_funct
-wifi.funct_opts[wifi.quiz] = wifi.quiz_funct
-
-ports.study_data = Port_Dict.PORTS
-wifi.study_data = Wifi_Dict.WIFI
-"""
-
-
