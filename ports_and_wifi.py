@@ -107,7 +107,8 @@ def dict_to_list(dictionary):
         new_list.append(list(dictionary[item].values()))    
     
     return new_list
-
+def user_input():
+    return str(input("Enter: "))
 def print_list(new_list):
     for i in new_list:
         print(i)
@@ -121,7 +122,8 @@ def print_port(port_dict, protocol):
     else:
         print(p_data.get("name"), "is in Port", p_data.get("number"))
 
-def print_wifi(wifi_dict, generation):
+def print_wifi(wifi_dict):
+    generation = str(input("Enter a Wifi Generation: "))
     w_data = wifi_dict[generation]
     try:
         w_data
@@ -175,6 +177,7 @@ def menu():
                 print("invalid response")
     return user_input
 
+
 def main():
     menu_choice = -1
     while(menu_choice != Menu_Options.QUIT):
@@ -220,14 +223,4 @@ def main():
                       Wifi_Index.STANDARD, Wifi_Index.RANGE))
             case _:
                break
-class Func:
-            
-    test = { Menu_Options.PORT_FIND : print_port}
-    
-class Para:
-    test = {"dict" : Port_Dict.PORTS,
-            "para" : "FTP"}
-    
-Func.test[Menu_Options.PORT_FIND](Para.test.get("dict"), Para.test.get("para"))
-
-#main()
+main()
