@@ -154,9 +154,12 @@ class Study_Option(Option):
     def study_choose(self):
         self.study_menu()
         menu_choice = self.inp()
-        for opts in self.menu_opts[menu_choice]:
-            print(f"{opts}. {self.menu_opts[menu_choice][opts]}")
-        funct_choice = self.inp()
+        if menu_choice in (self.find, self.drill, self.quiz):
+            for opts in self.menu_opts[menu_choice]:
+                print(f"{opts}. {self.menu_opts[menu_choice][opts]}")
+            funct_choice = self.inp()
+        else:
+            funct_choice = "q"
         return [menu_choice, funct_choice]
         
     def activate(self, menu_choice, *args, **kwargs):
@@ -191,14 +194,16 @@ class Study_Option(Option):
     
     def test_choice(self):
             user_choices = self.study_choose()
-            menu_choice = user_choices[0]
-            funct_choice = user_choices[1]
+            if user_choices[0] in (self.find, self.drill, self.quiz):
+                menu_choice = user_choices[0]
+                funct_choice = user_choices[1]
             #print(ports.templates[menu_choice][funct_choice])
-            match menu_choice:
-                case self.find:
-                    self.activate(menu_choice, self.templates[menu_choice][funct_choice])
-                case _:
-                    self.activate(menu_choice, **self.templates[menu_choice][funct_choice])
+                if funct_choice in (self.find, self.drill, self.quiz):
+                    match menu_choice:
+                        case self.find:
+                            self.activate(menu_choice, self.templates[menu_choice][funct_choice])
+                        case _:
+                            self.activate(menu_choice, **self.templates[menu_choice][funct_choice])
                     
 class study:
     PORTS_BY_NUM = "1"
@@ -208,6 +213,7 @@ class study:
     WIFI_RANGE = "3"
 
 def main():
+    user_inp = ""
     main_menu = Option()
     ports = Study_Option("1")
     wifi = Study_Option("2")
@@ -269,15 +275,18 @@ def main():
     
     ports.study_data = Port_Dict.PORTS
     wifi.study_data = Wifi_Dict.WIFI
-    main_menu.print_menu()
-    user_inp = main_menu.inp()
+ 
+    
+    while (user_inp != "q"):
+        main_menu.print_menu()
+        user_inp = main_menu.inp()
 
 
-    match user_inp:
-        case ports.opt_num:
-           ports.test_choice()
-        case wifi.opt_num:
-            wifi.test_choice()
+        match user_inp:
+            case ports.opt_num:
+                ports.test_choice()
+            case wifi.opt_num:
+                wifi.test_choice()
             
             
 main()
